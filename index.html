@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CraveCraft — Every Layer, Crafted to be Craved</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="CraveCraft — Handcrafted luxury comfort food. Experience our full-screen cinematic 3D journey of Classic Burgers, Wood-Fired Pizza, Royal Dum Biryani, and Handmade Pasta.">
+  <meta name="keywords" content="CraveCraft, luxury food, 3D food animation, burger, pizza, biryani, pasta, Gampa Sai Charan">
+  <meta name="author" content="Gampa Sai Charan">
+
+  <meta property="og:title" content="CraveCraft — Every Layer, Crafted to be Craved">
+  <meta property="og:description" content="Cinematic full-screen food experience featuring handcrafted burgers, artisanal pizzas, dum biryani, and handmade pasta.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/posters/burger.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D9A441'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+
+  <!-- Google Fonts: Bodoni Moda (Display/Headlines/Titles 500,600,700 italic) & DM Sans (Body/Nav/Buttons 400,500,600) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600;1,6..96,700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Pinned GSAP, ScrollTrigger & Lenis Smooth Scroll Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script>window.Lenis || document.write('<script src="js/lenis.min.js"><\/script>');</script>
+</head>
+<body data-theme="light">
+
+  <!-- Top-Line Preloader (Job 2: Thin line progress at the top of the screen, no spinner) -->
+  <div class="top-preloader" id="topPreloader" aria-hidden="true">
+    <div class="top-preloader-bar" id="topPreloaderBar"></div>
+  </div>
+
+  <!-- Dual Stacked Theme Canvas (Job 2: GPU-accelerated opacity blending, zero document repaint) -->
+  <div class="theme-bg-canvas" id="themeBgCanvas" aria-hidden="true">
+    <div class="theme-bg-layer theme-bg-base" id="themeBgBase"></div>
+    <div class="theme-bg-layer theme-bg-incoming" id="themeBgIncoming"></div>
+  </div>
+
+  <!-- ========================================================================
+       2. TOP ANNOUNCEMENT BAR (Left-anchored text)
+       ======================================================================== -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-content">
+      <span>Handcrafted daily</span>
+      <span class="dot-separator">•</span>
+      <span>Fresh ingredients</span>
+      <span class="dot-separator">•</span>
+      <span>Fast local delivery</span>
+      <span class="dot-separator">•</span>
+      <span>Every layer, crafted to be craved</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       3. GLOBAL CINEMATIC NAVBAR
+       ======================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <!-- Brand Logo / Wordmark -->
+      <a href="#heroStorySection" class="brand-logo" aria-label="CraveCraft Home">
+        <span class="brand-wordmark">CRAVECRAFT</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li class="nav-item-dropdown">
+            <a href="#signatureDishesWrap" class="nav-link dropdown-trigger">
+              Menu <span class="nav-arrow">▾</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#dish-burger" class="dropdown-link">Classic Burger</a></li>
+              <li><a href="#dish-pizza" class="dropdown-link">Artisan Pizza</a></li>
+              <li><a href="#dish-biryani" class="dropdown-link">Chicken Biryani</a></li>
+              <li><a href="#dish-pasta" class="dropdown-link">Handmade Pasta</a></li>
+            </ul>
+          </li>
+          <li><a href="#signatureDishesWrap" class="nav-link">Craft</a></li>
+          <li><a href="#ingredientsStrip" class="nav-link">Ingredients</a></li>
+          <li><a href="#signatureMenu" class="nav-link">Catalogue</a></li>
+          <li><a href="#storySection" class="nav-link">Story</a></li>
+          <li><a href="#contactSection" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Search, Cart, Mobile Toggle) -->
+      <div class="nav-actions">
+        <!-- Search Toggle -->
+        <button class="nav-action-btn" id="searchToggleBtn" aria-label="Search Dishes">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Cart Button with Dynamic Red Badge -->
+        <button class="nav-action-btn cart-btn" id="navCartBtn" aria-label="Open Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="cartCountBadge" aria-label="Cart items count">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Search Dropdown Bar -->
+    <div class="quick-search-bar" id="quickSearchBar">
+      <div class="quick-search-inner">
+        <input type="text" id="searchInput" placeholder="Search craft burgers, artisan pizza, biryani, ingredients..." autocomplete="off">
+        <button class="search-close-btn" id="searchCloseBtn" aria-label="Close search">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       4. FULL-SCREEN HERO STORY (7 Auto-Advancing Scenes, Left-Anchored)
+       ======================================================================== -->
+  <main>
+    <section class="hero-story-section" id="heroStorySection" aria-label="CraveCraft Cinematic Story">
+      <!-- Full-Screen Video Background Stage (Full clarity edge-to-edge, no shade overlay) -->
+      <div class="hero-video-stage" id="heroVideoStage">
+        <!-- Rendered dynamically by main.js: 7 full-screen edge-to-edge video layers -->
+      </div>
+
+      <!-- Foreground Headlines & Typography Stage (Always Left-Anchored) -->
+      <div class="hero-text-stage" id="heroTextStage">
+        <div class="hero-text-container" id="heroTextContainer">
+          <!-- Eyebrow Bodoni Moda italic -->
+          <p class="hero-eyebrow" id="heroEyebrow">Crafted in Layers</p>
+
+          <!-- Split-line Masked Headline (Bodoni Moda UPPERCASE) -->
+          <h1 class="hero-headline" id="heroHeadline">
+            <div class="line-mask"><span class="line-inner" id="heroLine1">CRAFTED</span></div>
+            <div class="line-mask"><span class="line-inner" id="heroLine2">IN LAYERS.</span></div>
+            <div class="line-mask" id="heroLine3Mask" style="display:none;"><span class="line-inner" id="heroLine3"></span></div>
+          </h1>
+
+          <!-- Body Description (max 34ch) -->
+          <p class="hero-description" id="heroDescription">
+            Pure flour, cold water, and time — the primal foundation.
+          </p>
+
+          <!-- Action CTA Button (Sharp solid rectangle) -->
+          <div class="hero-cta-wrap" id="heroCtaWrap">
+            <a href="#signatureDishesWrap" class="btn-hero-order" id="heroOrderBtn">ORDER NOW</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Bottom Controls (Dots & Navigation) -->
+      <div class="hero-bottom-bar">
+        <!-- Prev Arrow -->
+        <button class="hero-arrow-btn" id="heroPrevBtn" aria-label="Previous scene">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Minimal Progress Dots -->
+        <div class="hero-dots-container" id="heroDotsContainer" role="tablist" aria-label="Hero scenes">
+          <!-- 7 minimal progress dots generated by js/main.js -->
+        </div>
+
+        <!-- Next Arrow -->
+        <button class="hero-arrow-btn" id="heroNextBtn" aria-label="Next scene">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Hover / Loop Indicator -->
+        <div class="hero-loop-status" id="heroLoopStatus">
+          <span class="status-dot"></span>
+          <span class="status-text">AUTO-PLAYING</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. FULL-SCREEN SIGNATURE DISH SCENES (ScrollTrigger Pinned Scrub)
+         ALL PANELS ANCHORED LEFT, DISH VIDEOS SHIFTED RIGHT (object-position: 70% center)
+         ====================================================================== -->
+    <div class="signature-dishes-wrap" id="signatureDishesWrap">
+      <!-- Dish 1: Classic Burger (Panel LEFT | Warm Amber-Black Background) -->
+      <section class="dish-scene-section" id="dish-burger" data-theme-target="burger">
+        <div class="dish-video-container">
+          <video class="dish-scrub-video" id="video-burger" muted loop playsinline preload="metadata" poster="assets/posters/burger.webp" width="1920" height="1080">
+            <source src="assets/videos/burger.mp4" type="video/mp4">
+          </video>
+          <div class="dish-video-fallback" style="background-image: url('assets/posters/burger.webp');"></div>
+        </div>
+
+        <div class="dish-content-panel panel-left">
+          <p class="dish-eyebrow">Signature 01 • Flame Grilled</p>
+          <div class="dish-title-mask">
+            <h2 class="dish-title">CLASSIC BURGER</h2>
+          </div>
+          <div class="dish-gold-underline"></div>
+          <p class="dish-description">
+            Seven masterfully balanced layers of fire-grilled beef, crisp garden greens, and house-made artisan sauce.
+          </p>
+
+          <!-- Ingredient List with 1.5px stroke currentColor SVG icons -->
+          <ul class="dish-ingredient-list" id="ingredients-burger">
+            <li class="dish-ingredient-row" data-index="0">
+              <span class="ingredient-icon-box" data-icon="assets/icons/bun.svg"><img src="assets/icons/bun.svg" alt="Sesame Bun" loading="lazy"></span>
+              <span class="ingredient-name">Sesame Bun</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="1">
+              <span class="ingredient-icon-box" data-icon="assets/icons/lettuce.svg"><img src="assets/icons/lettuce.svg" alt="Lettuce" loading="lazy"></span>
+              <span class="ingredient-name">Lettuce</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="2">
+              <span class="ingredient-icon-box" data-icon="assets/icons/tomato.svg"><img src="assets/icons/tomato.svg" alt="Tomato" loading="lazy"></span>
+              <span class="ingredient-name">Tomato</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="3">
+              <span class="ingredient-icon-box" data-icon="assets/icons/onion.svg"><img src="assets/icons/onion.svg" alt="Onion" loading="lazy"></span>
+              <span class="ingredient-name">Onion</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="4">
+              <span class="ingredient-icon-box" data-icon="assets/icons/cheese.svg"><img src="assets/icons/cheese.svg" alt="Cheese" loading="lazy"></span>
+              <span class="ingredient-name">Cheese</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="5">
+              <span class="ingredient-icon-box" data-icon="assets/icons/patty.svg"><img src="assets/icons/patty.svg" alt="Beef Patty" loading="lazy"></span>
+              <span class="ingredient-name">Beef Patty</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="6">
+              <span class="ingredient-icon-box" data-icon="assets/icons/sauce.svg"><img src="assets/icons/sauce.svg" alt="Sauce" loading="lazy"></span>
+              <span class="ingredient-name">Sauce</span>
+            </li>
+          </ul>
+
+          <div class="dish-panel-footer">
+            <span class="dish-price">₹349</span>
+            <button class="btn-dish-order" onclick="window.craveApp.addToCart('burger')">ORDER NOW</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dish 2: Artisan Pizza (Panel LEFT | Deep Orange-Brown Background) -->
+      <section class="dish-scene-section" id="dish-pizza" data-theme-target="pizza">
+        <div class="dish-video-container">
+          <video class="dish-scrub-video" id="video-pizza" muted loop playsinline preload="metadata" poster="assets/posters/pizza.webp" width="1920" height="1080">
+            <source src="assets/videos/pizza.mp4" type="video/mp4">
+          </video>
+          <div class="dish-video-fallback" style="background-image: url('assets/posters/pizza.webp');"></div>
+        </div>
+
+        <div class="dish-content-panel panel-left">
+          <p class="dish-eyebrow">Signature 02 • Wood-Fired</p>
+          <div class="dish-title-mask">
+            <h2 class="dish-title">PIZZA</h2>
+          </div>
+          <div class="dish-gold-underline"></div>
+          <p class="dish-description">
+            Slow-fermented sourdough crust topped with rich San Marzano pomodoro, melted mozzarella, and fresh herbs.
+          </p>
+
+          <ul class="dish-ingredient-list" id="ingredients-pizza">
+            <li class="dish-ingredient-row" data-index="0">
+              <span class="ingredient-icon-box" data-icon="assets/icons/dough.svg"><img src="assets/icons/dough.svg" alt="Dough" loading="lazy"></span>
+              <span class="ingredient-name">Dough</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="1">
+              <span class="ingredient-icon-box" data-icon="assets/icons/tomato_sauce.svg"><img src="assets/icons/tomato_sauce.svg" alt="Tomato Sauce" loading="lazy"></span>
+              <span class="ingredient-name">Tomato Sauce</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="2">
+              <span class="ingredient-icon-box" data-icon="assets/icons/mozzarella.svg"><img src="assets/icons/mozzarella.svg" alt="Mozzarella Cheese" loading="lazy"></span>
+              <span class="ingredient-name">Mozzarella Cheese</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="3">
+              <span class="ingredient-icon-box" data-icon="assets/icons/pepperoni.svg"><img src="assets/icons/pepperoni.svg" alt="Pepperoni" loading="lazy"></span>
+              <span class="ingredient-name">Pepperoni</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="4">
+              <span class="ingredient-icon-box" data-icon="assets/icons/olives.svg"><img src="assets/icons/olives.svg" alt="Olives" loading="lazy"></span>
+              <span class="ingredient-name">Olives</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="5">
+              <span class="ingredient-icon-box" data-icon="assets/icons/capsicum.svg"><img src="assets/icons/capsicum.svg" alt="Capsicum" loading="lazy"></span>
+              <span class="ingredient-name">Capsicum</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="6">
+              <span class="ingredient-icon-box" data-icon="assets/icons/oregano.svg"><img src="assets/icons/oregano.svg" alt="Oregano" loading="lazy"></span>
+              <span class="ingredient-name">Oregano</span>
+            </li>
+          </ul>
+
+          <div class="dish-panel-footer">
+            <span class="dish-price">₹429</span>
+            <button class="btn-dish-order" onclick="window.craveApp.addToCart('pizza')">ORDER NOW</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dish 3: Chicken Biryani (Panel LEFT | Dark Amber Steam Background) -->
+      <section class="dish-scene-section" id="dish-biryani" data-theme-target="biryani">
+        <div class="dish-video-container">
+          <video class="dish-scrub-video" id="video-biryani" muted loop playsinline preload="metadata" poster="assets/posters/biryani.webp" width="1920" height="1080">
+            <source src="assets/videos/biryani.mp4" type="video/mp4">
+          </video>
+          <div class="dish-video-fallback" style="background-image: url('assets/posters/biryani.webp');"></div>
+        </div>
+
+        <div class="dish-content-panel panel-left">
+          <p class="dish-eyebrow">Signature 03 • Royal Dum Spiced</p>
+          <div class="dish-title-mask">
+            <h2 class="dish-title">CHICKEN BIRYANI</h2>
+          </div>
+          <div class="dish-gold-underline"></div>
+          <p class="dish-description">
+            Aged long-grain basmati infused with Kashmiri saffron, tender marinated chicken, and caramelized aromatics.
+          </p>
+
+          <ul class="dish-ingredient-list" id="ingredients-biryani">
+            <li class="dish-ingredient-row" data-index="0">
+              <span class="ingredient-icon-box" data-icon="assets/icons/rice.svg"><img src="assets/icons/rice.svg" alt="Basmati Rice" loading="lazy"></span>
+              <span class="ingredient-name">Basmati Rice</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="1">
+              <span class="ingredient-icon-box" data-icon="assets/icons/chicken.svg"><img src="assets/icons/chicken.svg" alt="Chicken" loading="lazy"></span>
+              <span class="ingredient-name">Chicken</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="2">
+              <span class="ingredient-icon-box" data-icon="assets/icons/onion.svg"><img src="assets/icons/onion.svg" alt="Onion" loading="lazy"></span>
+              <span class="ingredient-name">Onion</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="3">
+              <span class="ingredient-icon-box" data-icon="assets/icons/tomato.svg"><img src="assets/icons/tomato.svg" alt="Tomato" loading="lazy"></span>
+              <span class="ingredient-name">Tomato</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="4">
+              <span class="ingredient-icon-box" data-icon="assets/icons/spices.svg"><img src="assets/icons/spices.svg" alt="Spices" loading="lazy"></span>
+              <span class="ingredient-name">Spices</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="5">
+              <span class="ingredient-icon-box" data-icon="assets/icons/herbs.svg"><img src="assets/icons/herbs.svg" alt="Herbs" loading="lazy"></span>
+              <span class="ingredient-name">Herbs</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="6">
+              <span class="ingredient-icon-box" data-icon="assets/icons/saffron.svg"><img src="assets/icons/saffron.svg" alt="Saffron" loading="lazy"></span>
+              <span class="ingredient-name">Saffron</span>
+            </li>
+          </ul>
+
+          <div class="dish-panel-footer">
+            <span class="dish-price">₹389</span>
+            <button class="btn-dish-order" onclick="window.craveApp.addToCart('biryani')">ORDER NOW</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dish 4: Handmade Pasta (Panel LEFT | Deep Navy-Teal Background) -->
+      <section class="dish-scene-section" id="dish-pasta" data-theme-target="pasta">
+        <div class="dish-video-container">
+          <video class="dish-scrub-video" id="video-pasta" muted loop playsinline preload="metadata" poster="assets/posters/pasta.webp" width="1920" height="1080">
+            <source src="assets/videos/pasta.mp4" type="video/mp4">
+          </video>
+          <div class="dish-video-fallback" style="background-image: url('assets/posters/pasta.webp');"></div>
+        </div>
+
+        <div class="dish-content-panel panel-left">
+          <p class="dish-eyebrow">Signature 04 • Al Dente Perfection</p>
+          <div class="dish-title-mask">
+            <h2 class="dish-title">PASTA</h2>
+          </div>
+          <div class="dish-gold-underline"></div>
+          <p class="dish-description">
+            Bronze-die extruded ribbons spun with rich roasted pomodoro, wild mushrooms, aged cheese, and fresh basil.
+          </p>
+
+          <ul class="dish-ingredient-list" id="ingredients-pasta">
+            <li class="dish-ingredient-row" data-index="0">
+              <span class="ingredient-icon-box" data-icon="assets/icons/pasta.svg"><img src="assets/icons/pasta.svg" alt="Pasta" loading="lazy"></span>
+              <span class="ingredient-name">Pasta</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="1">
+              <span class="ingredient-icon-box" data-icon="assets/icons/tomato_sauce.svg"><img src="assets/icons/tomato_sauce.svg" alt="Tomato Sauce" loading="lazy"></span>
+              <span class="ingredient-name">Tomato Sauce</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="2">
+              <span class="ingredient-icon-box" data-icon="assets/icons/mushroom.svg"><img src="assets/icons/mushroom.svg" alt="Mushroom" loading="lazy"></span>
+              <span class="ingredient-name">Mushroom</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="3">
+              <span class="ingredient-icon-box" data-icon="assets/icons/cheese.svg"><img src="assets/icons/cheese.svg" alt="Cheese" loading="lazy"></span>
+              <span class="ingredient-name">Cheese</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="4">
+              <span class="ingredient-icon-box" data-icon="assets/icons/basil.svg"><img src="assets/icons/basil.svg" alt="Basil" loading="lazy"></span>
+              <span class="ingredient-name">Basil</span>
+            </li>
+            <li class="dish-ingredient-row" data-index="5">
+              <span class="ingredient-icon-box" data-icon="assets/icons/pepper.svg"><img src="assets/icons/pepper.svg" alt="Black Pepper" loading="lazy"></span>
+              <span class="ingredient-name">Black Pepper</span>
+            </li>
+          </ul>
+
+          <div class="dish-panel-footer">
+            <span class="dish-price">₹369</span>
+            <button class="btn-dish-order" onclick="window.craveApp.addToCart('pasta')">ORDER NOW</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         6. SECTION: SIGNATURE MENU (Catalogue Grid with Hover Video Previews)
+         ====================================================================== -->
+    <section class="signature-menu-section" id="signatureMenu" data-theme-target="dark">
+      <div class="section-container">
+        <div class="section-heading-row">
+          <div>
+            <p class="section-eyebrow">Handcrafted Everyday</p>
+            <h2 class="section-title">SIGNATURE MENU</h2>
+            <p class="section-subtitle">
+              Hover over any selection to trigger a high-definition motion preview.
+            </p>
+          </div>
+          <div class="menu-filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="burger">Burgers</button>
+            <button class="filter-btn" data-filter="pizza">Pizza</button>
+            <button class="filter-btn" data-filter="biryani">Biryani</button>
+            <button class="filter-btn" data-filter="pasta">Pasta</button>
+          </div>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+          <!-- Dynamically populated from CONFIG.menuCatalog in main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. SECTION: FRESH INGREDIENTS (Continuous Horizontal Strip)
+         ====================================================================== -->
+    <section class="ingredients-strip-section" id="ingredientsStrip" aria-label="Fresh Ingredients Strip">
+      <div class="ingredients-track" id="ingredientsTrack">
+        <div class="ingredients-group">
+          <div class="ingredient-chip"><img src="assets/icons/bun.svg" alt="" aria-hidden="true"><span>BRIOCHE BUNS</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/tomato.svg" alt="" aria-hidden="true"><span>SAN MARZANO TOMATOES</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/mozzarella.svg" alt="" aria-hidden="true"><span>MOZZARELLA DI BUFALA</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/saffron.svg" alt="" aria-hidden="true"><span>KASHMIRI SAFFRON</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/basil.svg" alt="" aria-hidden="true"><span>GENOVESE BASIL</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/olives.svg" alt="" aria-hidden="true"><span>KALAMATA OLIVES</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/mushroom.svg" alt="" aria-hidden="true"><span>WILD PORCINI</span></div>
+        </div>
+        <div class="ingredients-group" aria-hidden="true">
+          <div class="ingredient-chip"><img src="assets/icons/bun.svg" alt="" aria-hidden="true"><span>BRIOCHE BUNS</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/tomato.svg" alt="" aria-hidden="true"><span>SAN MARZANO TOMATOES</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/mozzarella.svg" alt="" aria-hidden="true"><span>MOZZARELLA DI BUFALA</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/saffron.svg" alt="" aria-hidden="true"><span>KASHMIRI SAFFRON</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/basil.svg" alt="" aria-hidden="true"><span>GENOVESE BASIL</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/olives.svg" alt="" aria-hidden="true"><span>KALAMATA OLIVES</span></div>
+          <div class="ingredient-chip"><img src="assets/icons/mushroom.svg" alt="" aria-hidden="true"><span>WILD PORCINI</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. MARQUEE BAND (Infinite Typography Rhythm)
+         ====================================================================== -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-inner">
+        <span>FRESH</span> <span class="marquee-dot">•</span>
+        <span>HANDMADE</span> <span class="marquee-dot">•</span>
+        <span>LAYERED</span> <span class="marquee-dot">•</span>
+        <span>CRAVED</span> <span class="marquee-dot">•</span>
+        <span>ARTISANAL</span> <span class="marquee-dot">•</span>
+        <span>CINEMATIC</span> <span class="marquee-dot">•</span>
+        <span>FRESH</span> <span class="marquee-dot">•</span>
+        <span>HANDMADE</span> <span class="marquee-dot">•</span>
+        <span>LAYERED</span> <span class="marquee-dot">•</span>
+        <span>CRAVED</span> <span class="marquee-dot">•</span>
+        <span>ARTISANAL</span> <span class="marquee-dot">•</span>
+        <span>CINEMATIC</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         9. SECTION: OUR STORY (Founder Note)
+         ====================================================================== -->
+    <section class="story-section" id="storySection" data-theme-target="dark">
+      <div class="section-container">
+        <div class="story-grid">
+          <!-- Founder Visual Card -->
+          <div class="story-visual-card">
+            <div class="story-image-wrap">
+              <img src="assets/posters/burger.jpg" alt="CraveCraft Culinary Craft" class="story-img" loading="lazy">
+              <div class="story-badge-overlay">
+                <span class="story-badge-text">EST. 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story Text Block (Left-anchored) -->
+          <div class="story-content-block">
+            <p class="section-eyebrow">The Culinary Philosophy</p>
+            <h2 class="story-quote">
+              "Great food is engineered layer by layer."
+            </h2>
+            <div class="story-body">
+              <p>
+                CraveCraft was founded by <strong>Gampa Sai Charan</strong>, a B.Tech CSE AI/ML student with a fierce passion for culinary architecture and visual perfection. We believe that true flavor is born when precision engineering meets raw, uncompromised ingredients.
+              </p>
+              <p>
+                Whether it is the slow-risen fermentation of sourdough, the delicate thermal balance of double-grilled patties, the royal dum steam sealing aged saffron basmati, or the bronze-extruded texture of hand-folded pasta ribbons — every millimeter is crafted to be craved.
+              </p>
+              <p class="disclaimer-note">
+                <small>* Brand note: CraveCraft is an artisanal food concept &amp; motion design experience. Founder information is verified; reviews and ratings are creative demonstrations.</small>
+              </p>
+            </div>
+
+            <div class="founder-card-footer">
+              <div class="founder-info">
+                <h4 class="founder-name">Gampa Sai Charan</h4>
+                <p class="founder-role">Founder &amp; Creative Technologist (B.Tech CSE AI/ML)</p>
+              </div>
+
+              <div class="founder-links">
+                <a href="mailto:ssaicharan229@gmail.com" class="founder-link-pill" title="Send Email">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  ssaicharan229@gmail.com
+                </a>
+                <a href="https://instagram.com/__sai__8055_" target="_blank" rel="noopener noreferrer" class="founder-link-pill" title="Instagram Profile">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  @__sai__8055_
+                </a>
+                <a href="https://github.com/ssaicharan229" target="_blank" rel="noopener noreferrer" class="founder-link-pill" title="GitHub Profile">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  ssaicharan229
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         10. SECTION: CONTACT & INQUIRIES
+         ====================================================================== -->
+    <section class="contact-section" id="contactSection" data-theme-target="dark">
+      <div class="section-container">
+        <div class="contact-grid">
+          <!-- Contact Left Details -->
+          <div class="contact-text-col">
+            <p class="section-eyebrow">Get In Touch</p>
+            <h2 class="section-title">CONNECT WITH CRAVECRAFT</h2>
+            <p class="contact-desc">
+              Have a culinary inquiry, private dining request, or feedback on our motion experience? Reach founder Gampa Sai Charan directly.
+            </p>
+
+            <div class="contact-cards-list">
+              <a href="mailto:ssaicharan229@gmail.com" class="contact-card-item">
+                <div class="contact-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <div class="contact-card-label">Direct Email</div>
+                  <div class="contact-card-value">ssaicharan229@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="https://instagram.com/__sai__8055_" target="_blank" rel="noopener noreferrer" class="contact-card-item">
+                <div class="contact-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </div>
+                <div>
+                  <div class="contact-card-label">Instagram Channel</div>
+                  <div class="contact-card-value">@__sai__8055_</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/ssaicharan229" target="_blank" rel="noopener noreferrer" class="contact-card-item">
+                <div class="contact-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </div>
+                <div>
+                  <div class="contact-card-label">GitHub Repository</div>
+                  <div class="contact-card-value">github.com/ssaicharan229</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form (Mailto Action) -->
+          <div class="contact-form-col">
+            <form class="crave-form" action="mailto:ssaicharan229@gmail.com" method="GET" enctype="text/plain">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="senderName">Your Name</label>
+                  <input type="text" id="senderName" name="name" placeholder="e.g. Alex Morgan" required>
+                </div>
+                <div class="form-group">
+                  <label for="senderSubject">Subject / Dish of Interest</label>
+                  <input type="text" id="senderSubject" name="subject" placeholder="e.g. Private Catering Inquiry" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Message</label>
+                <textarea id="senderMessage" name="body" rows="5" placeholder="Share your vision, order details, or collaboration thoughts..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit-order">
+                SEND INQUIRY VIA EMAIL
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       11. FOOTER (Left-Anchored Wordmark & Editorial Links)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-wordmark-wrap" aria-hidden="true">
+      <div class="footer-giant-wordmark">CRAVECRAFT</div>
+    </div>
+
+    <div class="footer-container">
+      <div class="footer-nav-row">
+        <a href="#heroStorySection" class="footer-nav-link">Home</a>
+        <a href="#signatureDishesWrap" class="footer-nav-link">Craft</a>
+        <a href="#dish-burger" class="footer-nav-link">Burgers</a>
+        <a href="#dish-pizza" class="footer-nav-link">Pizza</a>
+        <a href="#dish-biryani" class="footer-nav-link">Biryani</a>
+        <a href="#dish-pasta" class="footer-nav-link">Pasta</a>
+        <a href="#ingredientsStrip" class="footer-nav-link">Ingredients</a>
+        <a href="#storySection" class="footer-nav-link">Story</a>
+        <a href="#contactSection" class="footer-nav-link">Contact</a>
+      </div>
+
+      <div class="footer-copyright-row">
+        <p class="footer-copy-text">
+          © 2026 CraveCraft. Every layer, crafted to be craved. Designed &amp; Crafted by <strong>Gampa Sai Charan</strong>.
+        </p>
+        <p class="footer-subtext">
+          Crafted with Bodoni Moda &amp; DM Sans. 100vw × 100vh Edge-to-Edge Cinematic Showcase.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       12. SLIDE-IN CART DRAWER (State in LocalStorage)
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true">
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+      <div class="cart-drawer-header">
+        <h3 class="cart-title">YOUR CRAFT ORDER</h3>
+        <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+      </div>
+
+      <div class="cart-drawer-body" id="cartDrawerItems">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-subtotal-row">
+          <span class="subtotal-label">Subtotal</span>
+          <span class="subtotal-amount" id="cartSubtotalAmount">₹0</span>
+        </div>
+        <p class="cart-tax-notice">Taxes &amp; artisanal packaging calculated at checkout.</p>
+        <button class="btn-checkout" id="cartCheckoutBtn">CHECKOUT ORDER</button>
+      </div>
+    </aside>
+  </div>
+
+
+
+  <!-- ========================================================================
+       14. SOUND TOGGLE BUTTON & TOOLTIP (Fixed Bottom-Left Square)
+       ======================================================================== -->
+  <div class="sound-control-wrap" id="soundControlWrap">
+    <button class="sound-toggle-btn" id="soundToggleBtn" aria-pressed="false" aria-label="Toggle sound (Hotkey: M)">
+      <span class="sound-icon-box" id="soundIconBox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </span>
+      <span class="sound-eq" id="soundEq" aria-hidden="true">
+        <span class="eq-bar eq-bar-1"></span>
+        <span class="eq-bar eq-bar-2"></span>
+        <span class="eq-bar eq-bar-3"></span>
+      </span>
+      <span class="sound-label" id="soundLabel">SOUND OFF</span>
+    </button>
+    <div class="sound-tooltip" id="soundTooltip" role="tooltip">Tap for sound</div>
+  </div>
+
+  <!-- ========================================================================
+       15. TOAST NOTIFICATION CONTAINER
+       ======================================================================== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Cinematic Sound Engine -->
+  <script src="js/sound.js"></script>
+  <!-- Core Motion & Application Engine -->
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 36" fill="none">
+  <path d="M18 4v14M14 4v7a4 4 0 0 0 8 0V4M18 18v12M28 4c0 7-4 10-4 13v13h2V18c2-3 4-7 4-14h-2z" stroke="#D9A441" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="38" y="24" font-family="'Cormorant Garamond', serif" font-size="22" font-weight="700" letter-spacing="3" fill="#F6F1EA">CRAVECRAFT</text>
+  <circle cx="152" cy="14" r="2" fill="#D9A441"/>
+</svg>
